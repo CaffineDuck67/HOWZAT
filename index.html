@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HOWZAT?! — Higher or Lower Cricket Stats</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Space+Mono:wght@400;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="stadium-glow"></div>
+
+<header class="topbar">
+  <div class="brand">
+    <span class="brand-main">HOWZAT?!</span>
+    <span class="brand-sub">a cricket stats stand-off</span>
+  </div>
+  <div class="score-panel">
+    <div class="score-box">
+      <span class="score-label">Streak</span>
+      <span class="score-value" id="streak">0</span>
+    </div>
+    <div class="score-box">
+      <span class="score-label">Best</span>
+      <span class="score-value" id="best">0</span>
+    </div>
+  </div>
+</header>
+
+<main class="arena">
+
+  <div class="stat-banner">
+    <span class="stat-banner-eyebrow">This round's category</span>
+    <span class="stat-banner-value" id="statCategory">—</span>
+  </div>
+
+  <div class="battle" id="battle">
+
+    <article class="player-card" id="cardA">
+      <div class="card-seam"></div>
+      <div class="country-tag" id="countryA"></div>
+      <p class="era-tag" id="eraA"></p>
+      <h2 class="player-name" id="nameA"></h2>
+      <div class="stat-window">
+        <span class="stat-figure" id="valueA">0</span>
+        <span class="stat-unit" id="unitA"></span>
+      </div>
+    </article>
+
+    <div class="vs-seam">
+      <span>VS</span>
+    </div>
+
+    <article class="player-card guess-card" id="cardB">
+      <div class="card-seam"></div>
+      <div class="country-tag" id="countryB"></div>
+      <p class="era-tag" id="eraB"></p>
+      <h2 class="player-name" id="nameB"></h2>
+      <div class="stat-window">
+        <span class="stat-figure" id="valueB">?</span>
+        <span class="stat-unit" id="unitB"></span>
+      </div>
+      <div class="guess-buttons" id="guessButtons">
+        <button class="guess-btn higher" id="higherBtn" type="button">▲ Higher</button>
+        <button class="guess-btn lower" id="lowerBtn" type="button">▼ Lower</button>
+      </div>
+    </article>
+
+  </div>
+
+  <p class="hint">Guess whether the second player's stat is <strong>higher</strong> or <strong>lower</strong> than the first. Get it right, they swap sides, and a new challenger walks out.</p>
+
+</main>
+
+<div class="out-stamp hidden" id="outStamp">OUT</div>
+
+<div class="modal-overlay hidden" id="gameOverModal">
+  <div class="modal">
+    <p class="modal-eyebrow">Innings over</p>
+    <h2 class="modal-title">You're out for <span id="finalStreak">0</span></h2>
+    <p class="modal-sub" id="modalSub"></p>
+
+    <div class="modal-form" id="nameForm">
+      <input type="text" id="playerNameInput" maxlength="18" placeholder="Enter your name" autocomplete="off">
+      <button class="primary-btn" id="submitScoreBtn" type="button">Add to leaderboard</button>
+    </div>
+
+    <button class="secondary-btn" id="playAgainBtn" type="button">Play again</button>
+  </div>
+</div>
+
+<section class="leaderboard">
+  <h3>🏆 Leaderboard</h3>
+  <ol id="leaderboardList" class="leaderboard-list"></ol>
+  <p class="leaderboard-empty hidden" id="leaderboardEmpty">No scores yet — be the first name on the honours board.</p>
+  <button class="reset-btn" id="clearBoardBtn" type="button">Reset leaderboard</button>
+</section>
+
+<footer class="site-footer">
+  Stats are career Test-match figures, chosen because Tests have been recorded continuously since 1877 — the only fair way to pit Bradman against Kohli. Recent, still-active players' figures are approximate.
+</footer>
+
+<script src="players.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
