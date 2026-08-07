@@ -85,7 +85,22 @@ body{
   margin-top:0.35rem;
 }
 
-.score-panel{ display:flex; gap:0.75rem; }
+.score-panel{ display:flex; gap:0.75rem; align-items:center; }
+
+.icon-btn{
+  background:var(--pitch-2);
+  border:1px solid rgba(241,236,218,0.15);
+  border-radius:10px;
+  width:44px;
+  height:44px;
+  font-size:1.1rem;
+  cursor:pointer;
+  color:var(--cream);
+  transition:transform 0.12s ease, background 0.15s ease;
+}
+
+.icon-btn:hover{ transform:translateY(-2px); background:var(--pitch-3); }
+.icon-btn[aria-pressed="false"]{ opacity:0.45; }
 
 .score-box{
   background:var(--pitch-2);
@@ -167,6 +182,22 @@ body{
   overflow:hidden;
   box-shadow:0 18px 40px -18px rgba(0,0,0,0.55);
   transition:transform 0.25s ease;
+  animation:card-in 0.4s ease;
+}
+
+@keyframes card-in{
+  from{ opacity:0; transform:translateY(14px) scale(0.98); }
+  to{ opacity:1; transform:translateY(0) scale(1); }
+}
+
+.score-box.pulse{
+  animation:pulse-box 0.5s ease;
+}
+
+@keyframes pulse-box{
+  0%{ transform:scale(1); }
+  40%{ transform:scale(1.18); }
+  100%{ transform:scale(1); }
 }
 
 /* stitched seam decoration along the top of each card, evoking a cricket ball */
@@ -238,6 +269,24 @@ body{
   letter-spacing:0.08em;
 }
 
+.compare-bar-track{
+  height:6px;
+  border-radius:4px;
+  background:rgba(20,23,15,0.12);
+  margin-top:0.6rem;
+  overflow:hidden;
+}
+
+.compare-bar{
+  height:100%;
+  width:0%;
+  border-radius:4px;
+  background:var(--gold);
+  transition:width 0.6s cubic-bezier(.2,.8,.3,1), background 0.3s ease;
+}
+
+.compare-bar.wrong-bar{ background:var(--leather); }
+
 .guess-buttons{
   display:flex;
   gap:0.6rem;
@@ -289,6 +338,25 @@ body{
   margin:1.75rem auto 0;
 }
 
+.kbd-hint{
+  text-align:center;
+  font-size:0.78rem;
+  color:#6c7a68;
+  margin:0.6rem auto 0;
+}
+
+kbd{
+  display:inline-block;
+  font-family:'Space Mono', monospace;
+  font-size:0.75rem;
+  background:var(--pitch-2);
+  border:1px solid rgba(241,236,218,0.2);
+  border-bottom-width:2px;
+  border-radius:5px;
+  padding:0.05rem 0.4rem;
+  color:var(--gold);
+}
+
 /* ---------- OUT stamp ---------- */
 .out-stamp{
   position:fixed;
@@ -312,6 +380,52 @@ body{
 }
 
 .hidden{ display:none !important; }
+
+/* ---------- milestone hype banner ---------- */
+.milestone-banner{
+  position:fixed;
+  top:1.25rem;
+  left:50%;
+  transform:translateX(-50%) translateY(-20px);
+  z-index:25;
+  background:var(--gold);
+  color:var(--ink);
+  font-family:'Anton', sans-serif;
+  letter-spacing:0.04em;
+  font-size:1rem;
+  padding:0.6rem 1.4rem;
+  border-radius:30px;
+  box-shadow:0 12px 30px -10px rgba(0,0,0,0.5);
+  opacity:0;
+  transition:opacity 0.25s ease, transform 0.25s ease;
+}
+
+.milestone-banner.show{
+  opacity:1;
+  transform:translateX(-50%) translateY(0);
+}
+
+/* ---------- confetti ---------- */
+.confetti-layer{
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  z-index:24;
+  overflow:hidden;
+}
+
+.confetti-piece{
+  position:absolute;
+  top:-10px;
+  width:8px;
+  height:14px;
+  opacity:0.9;
+  animation:confetti-fall linear forwards;
+}
+
+@keyframes confetti-fall{
+  to{ transform:translateY(105vh) rotate(540deg); opacity:0.4; }
+}
 
 /* ---------- modal ---------- */
 .modal-overlay{
@@ -412,8 +526,33 @@ body{
   font-size:1.3rem;
   color:var(--gold);
   letter-spacing:0.02em;
+  margin:0;
+}
+
+.leaderboard-header{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:0.6rem;
   margin-bottom:0.75rem;
-  text-align:center;
+}
+
+.lb-status{
+  display:flex;
+  align-items:center;
+  gap:0.35rem;
+  font-size:0.7rem;
+  color:var(--chalk);
+  letter-spacing:0.04em;
+  text-transform:uppercase;
+}
+
+.lb-status-dot{
+  width:7px;
+  height:7px;
+  border-radius:50%;
+  background:var(--gold);
+  box-shadow:0 0 0 3px rgba(216,177,68,0.2);
 }
 
 .leaderboard-list{
@@ -436,6 +575,17 @@ body{
   font-family:'Space Mono', monospace;
   font-size:0.9rem;
   border-bottom:1px dashed rgba(241,236,218,0.12);
+  transition:background 0.4s ease;
+}
+
+.leaderboard-list li.new-entry{
+  background:rgba(216,177,68,0.16);
+  animation:new-entry-glow 1.8s ease;
+}
+
+@keyframes new-entry-glow{
+  0%{ background:rgba(216,177,68,0.45); }
+  100%{ background:rgba(216,177,68,0.16); }
 }
 
 .leaderboard-list li:last-child{ border-bottom:none; }
@@ -447,6 +597,10 @@ body{
   width:1.4rem;
   text-align:right;
 }
+
+.leaderboard-list li.medal-1::before{ content:"🥇"; }
+.leaderboard-list li.medal-2::before{ content:"🥈"; }
+.leaderboard-list li.medal-3::before{ content:"🥉"; }
 
 .leaderboard-list li .lb-name{ flex:1; color:var(--cream); }
 .leaderboard-list li .lb-score{ color:var(--gold); font-weight:700; }
