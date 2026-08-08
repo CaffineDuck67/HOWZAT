@@ -172,7 +172,7 @@ const PLAYERS = [
   { name: "Shoaib Akhtar", country: "Pakistan", era: "1997–2007", matches: 46, runs: 544, average: 10.07, hundreds: 0, highestScore: 47, notOut: false, wickets: 178 },
   { name: "Fazal Mahmood", country: "Pakistan", era: "1952–1962", matches: 34, runs: 620, average: 14.09, hundreds: 0, highestScore: 60, notOut: false, wickets: 139 },
   { name: "Sarfraz Nawaz", country: "Pakistan", era: "1969–1984", matches: 55, runs: 1045, average: 17.71, hundreds: 0, highestScore: 90, notOut: false, wickets: 177 },
-  { name: "Umar Gul", country: "Pakistan", era: "2003–2013", matches: 47, runs: 577, average: 11.77, hundreds: 0, highestScore: 65, notOut: unnot: false, wickets: 163 },
+  { name: "Umar Gul", country: "Pakistan", era: "2003–2013", matches: 47, runs: 577, average: 11.77, hundreds: 0, highestScore: 65, notOut: false, wickets: 163 },
   { name: "Shaheen Afridi", country: "Pakistan", era: "2018–present", matches: 29, runs: 433, average: 12.02, hundreds: 0, highestScore: 24, notOut: false, wickets: 113 },
   { name: "Mitchell Starc", country: "Australia", era: "2011–present", matches: 89, runs: 2092, average: 20.92, hundreds: 0, highestScore: 99, notOut: false, wickets: 358 },
   { name: "Josh Hazlewood", country: "Australia", era: "2014–present", matches: 70, runs: 512, average: 11.37, hundreds: 0, highestScore: 39, notOut: false, wickets: 273 },
